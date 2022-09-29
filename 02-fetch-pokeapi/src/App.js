@@ -6,10 +6,11 @@ Hint: Don't forget the dependency array!
 */
 
 import "./styles.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function App() {
   const [pokemon, setPokemon] = useState([]);
+  const [nextURL, setCount] = useState("https://pokeapi.co/api/v2/pokemon");
 
   async function loadPokemon() {
     try {
@@ -21,9 +22,14 @@ export default function App() {
     }
   }
 
+  useEffect(() => {
+    console.log("Hello World");
+  }, [loadPokemon]);
+
   return (
     <main className="App">
       <button onClick={loadPokemon}>Load Pokémon</button>
+      <button onClick={useState}>Load Next 20 Pokémon</button>
       <ul>
         {pokemon.map(({ name }) => (
           <li key={name}>{name}</li>
